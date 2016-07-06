@@ -1,17 +1,18 @@
 'use strict';
 
-var gulp = require('gulp');
-var sass = require('gulp-sass');
-var browserSync = require('browser-sync').create();
+var gulp = require('gulp'),
+  //sass = require('gulp-sass');
+  stylus = require('gulp-stylus'),
+  browserSync = require('browser-sync').create();
 
 // Static Server + watching scss/html files
-gulp.task('serve', ['sass'], function() {
+gulp.task('serve', ['stylus'], function() {
 
     browserSync.init({
         server: "./"
     });
 
-    gulp.watch("dist/*.scss", ['sass']);
+    gulp.watch("dist/*.styl", ['stylus']);
     gulp.watch("*.html").on('change', browserSync.reload);
 });
 
@@ -25,9 +26,9 @@ gulp.task('serve', ['sass'], function() {
 //         .pipe(browserSync.stream());
 // });
 
-gulp.task('sass', function() {
-    return gulp.src("dist/*.scss")
-        .pipe(sass())
+gulp.task('stylus', function() {
+    return gulp.src("dist/*.styl")
+        .pipe(stylus())
         .pipe(gulp.dest("css"))
         .pipe(browserSync.stream());
 });
