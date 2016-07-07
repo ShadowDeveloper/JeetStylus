@@ -3,7 +3,7 @@
 var gulp = require('gulp'),
   //sass = require('gulp-sass');
   stylus = require('gulp-stylus'),
-  prefixer = require('gulp-autoprefixer'),
+  autoprefixer = require('gulp-autoprefixer'),
   rupture = require('rupture'),
   jeet = require('jeet'),
   browserSync = require('browser-sync').create();
@@ -29,6 +29,9 @@ gulp.task('stylus', function() {
         .pipe(stylus({
           use:[jeet()],
           compress: false
+        }))
+        .pipe(autoprefixer({
+          browsers: ['last 2 version']
         }))
         .pipe(gulp.dest("css"))
         .pipe(browserSync.stream());
